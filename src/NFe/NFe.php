@@ -1,10 +1,10 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\NFe;
+namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\v2\NFe\Documento;
-use RocheleEdenis\LaravelNotazz\v2\NFe\Produtos;
-use RocheleEdenis\LaravelNotazz\v2\NFe\Destinatario;
+use RocheleEdenis\LaravelNotazz\NFe\Documento;
+use RocheleEdenis\LaravelNotazz\NFe\Produtos;
+use RocheleEdenis\LaravelNotazz\NFe\Destinatario;
 
 class NFe
 {

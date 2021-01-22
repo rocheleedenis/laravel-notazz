@@ -1,10 +1,10 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\Builders;
+namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use Illuminate\Support\Str;
-use RocheleEdenis\LaravelNotazz\v2\NFe\Documento;
-use RocheleEdenis\LaravelNotazz\v2\Exceptions\MethodNotFoundException;
+use RocheleEdenis\LaravelNotazz\NFe\Documento;
+use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
 
 class DocumentoBuilder
 {

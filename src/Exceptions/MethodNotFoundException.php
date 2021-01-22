@@ -1,6 +1,6 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\Exceptions;
+namespace RocheleEdenis\LaravelNotazz\Exceptions;
 
 use Exception;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\Builders;
+namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use \Illuminate\Support\Str;
-use RocheleEdenis\LaravelNotazz\v2\NFe\Produtos;
-use RocheleEdenis\LaravelNotazz\v2\NFe\ProdutoItem;
-use RocheleEdenis\LaravelNotazz\v2\Exceptions\MethodNotFoundException;
+use RocheleEdenis\LaravelNotazz\NFe\Produtos;
+use RocheleEdenis\LaravelNotazz\NFe\ProdutoItem;
+use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
 
 class ProdutosBuilder
 {

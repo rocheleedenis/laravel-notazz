@@ -1,8 +1,8 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\NFe;
+namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\v2\Resource;
+use RocheleEdenis\LaravelNotazz\Resource;
 
 class ProdutoItem extends Resource
 {

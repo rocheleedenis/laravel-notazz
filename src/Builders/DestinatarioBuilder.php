@@ -1,17 +1,15 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\Builders;
+namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use \Illuminate\Support\Str;
-use RocheleEdenis\LaravelNotazz\v2\Exceptions\MethodNotFoundException;
-use RocheleEdenis\LaravelNotazz\v2\Nfe\Destinatario as DestinatarioNFSe;
+use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
+use RocheleEdenis\LaravelNotazz\Nfe\Destinatario as DestinatarioNFSe;
 
 class DestinatarioBuilder
 {
     protected $destinatario;
     protected $lastCalled;
-
-    // protected $emailList = [];
 
     public function __construct()
     {

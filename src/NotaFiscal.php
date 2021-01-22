@@ -1,9 +1,9 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2;
+namespace RocheleEdenis\LaravelNotazz;
 
-use RocheleEdenis\LaravelNotazz\v2\Client\Client;
-use RocheleEdenis\LaravelNotazz\v2\Builders\NotaFiscalBuilder;
+use RocheleEdenis\LaravelNotazz\Client\Client;
+use RocheleEdenis\LaravelNotazz\Builders\NotaFiscalBuilder;
 
 class NotaFiscal extends NotaFiscalBuilder
 {

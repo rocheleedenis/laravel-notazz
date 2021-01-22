@@ -1,10 +1,10 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\Builders;
+namespace RocheleEdenis\LaravelNotazz\Builders;
 
-use RocheleEdenis\LaravelNotazz\v2\NFe\NFe;
-use RocheleEdenis\LaravelNotazz\v2\Builders\DestinatarioBuilder;
-use RocheleEdenis\LaravelNotazz\v2\Builders\DocumentoBuilder;
+use RocheleEdenis\LaravelNotazz\NFe\NFe;
+use RocheleEdenis\LaravelNotazz\Builders\DestinatarioBuilder;
+use RocheleEdenis\LaravelNotazz\Builders\DocumentoBuilder;
 
 class NotaFiscalBuilder
 {

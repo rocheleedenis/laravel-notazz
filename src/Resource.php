@@ -1,6 +1,6 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2;
+namespace RocheleEdenis\LaravelNotazz;
 
 class Resource
 {

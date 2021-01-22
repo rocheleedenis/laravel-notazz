@@ -1,6 +1,6 @@
 <?php
 
-namespace RocheleEdenis\LaravelNotazz\v2\Client;
+namespace RocheleEdenis\LaravelNotazz\Client;
 
 class Client
 {
