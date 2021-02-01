@@ -2,6 +2,8 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
+use Illuminate\Support\Str;
+
 class Produtos
 {
     /**
@@ -28,15 +30,19 @@ class Produtos
 
     public function getSumItemsValue()
     {
-        return $this->itens->sum('document_product_unitary_value');
+        return $this->itens->sum(function ($item) {
+            return $item->get('document_product_unitary_value') * $item->get('document_product_qtd');
+        });
     }
 
     public function mount()
     {
         $itens = [];
 
-        $itens['document_product'] = $this->itens->map(function ($item) {
-            return $item->toArray();
+        $itens['DOCUMENT_PRODUCT'] = $this->itens->map(function ($item) {
+            return $item->mapWithKeys(function($value, $key) {
+                return [Str::upper($key) => $value];
+            })->toArray();
         })->toArray();
 
         return $itens;

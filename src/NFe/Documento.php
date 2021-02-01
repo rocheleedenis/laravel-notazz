@@ -2,6 +2,8 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
+use Illuminate\Support\Str;
+
 class Documento
 {
     /**
@@ -63,11 +65,11 @@ class Documento
      * Set the value of DOCUMENT_REFERENCED
      * Chave da nota fiscal referenciada. Utilizar quando DOCUMENT_GOAL for diferente de 1
      *
-     * @param int $document_referenced
+     * @param string $document_referenced
      */
-    public function setDocumentReferenced(int $document_referenced)
+    public function setDocumentReferenced(string $document_referenced)
     {
-        $this->collection->put('document_referenced', (string) $document_referenced);
+        $this->collection->put('document_referenced', $document_referenced);
     }
 
     /**
@@ -121,6 +123,8 @@ class Documento
 
     public function mount()
     {
-        return $this->collection->toArray();
+        return $this->collection->mapWithKeys(function($value, $key) {
+            return [Str::upper($key) => $value];
+        })->toArray();
     }
 }

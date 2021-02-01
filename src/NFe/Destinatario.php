@@ -38,7 +38,7 @@ class Destinatario
      */
     public function setDestinationTaxid(int $destination_taxid)
     {
-        $this->collection->put('destination_taxid', $destination_taxid);
+        $this->collection->put('destination_taxid', (string) $destination_taxid);
     }
 
     /**
@@ -109,7 +109,7 @@ class Destinatario
      *
      * @param string $destination_complement
      */
-    public function setDestinationComplement(string $destination_complement = '')
+    public function setDestinationComplement($destination_complement = '')
     {
         $this->collection->put('destination_complement', $destination_complement);
     }
@@ -147,7 +147,7 @@ class Destinatario
         $estadosBrasileiros = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
 
         if (!in_array($destination_uf, $estadosBrasileiros)) {
-            throw new Exception('Estado do destinatário (UF) não existe!', 1);
+            throw new \Exception('Estado do destinatário (UF) não existe!', 1);
         }
 
         $this->collection->put('destination_uf', $destination_uf);
@@ -200,6 +200,8 @@ class Destinatario
 
     public function mount()
     {
-        return $this->collection->toArray();
+        return $this->collection->mapWithKeys(function($value, $key) {
+            return [Str::upper($key) => $value];
+        })->toArray();
     }
 }
