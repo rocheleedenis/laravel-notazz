@@ -5,7 +5,7 @@ namespace RocheleEdenis\LaravelNotazz;
 use RocheleEdenis\LaravelNotazz\Client\Client;
 use RocheleEdenis\LaravelNotazz\Builders\NotaFiscalBuilder;
 
-class NotaFiscal extends NotaFiscalBuilder
+class Notazz extends NotaFiscalBuilder
 {
     /**
      * @var string

@@ -2,99 +2,32 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\Resource;
+use \Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
-class Destinatario extends Resource
+class Destinatario
 {
     /**
-     * @var string
-     */
-    protected $destination_name;
-    /**
-     * @var int
-     */
-    protected $destination_taxid;
-    /**
-     * @var string
-     */
-    protected $destination_ie;
-    /**
-     * @var string
-     */
-    protected $destination_im;
-    /**
-     * @var string
-     */
-    protected $destination_taxtype;
-    /**
-     * @var string
-     */
-    protected $destination_street;
-    /**
-     * @var string
-     */
-    protected $destination_number;
-    /**
-     * @var string
-     */
-    protected $destination_complement;
-    /**
-     * @var string
-     */
-    protected $destination_district;
-    /**
-     * @var string
-     */
-    protected $destination_city;
-    /**
-     * @var string
-     */
-    protected $destination_uf;
-    /**
-     * @var string
-     */
-    protected $destination_zipcode;
-    /**
-     * @var int
-     */
-    protected $destination_phone;
-    /**
-     * @var string
-     */
-    protected $destination_email;
-    /**
-     * @var array
-     */
-    protected $destination_email_send;
-
-    /**
-     * Get the value of DESTINATION_NAME
+     * Collection object.
      *
-     * @return string
+     * @var Collection
      */
-    public function getDestinationName()
+    protected $collection;
+
+    public function __construct()
     {
-        return $this->destination_name;
+        $this->collection = collect();
     }
 
     /**
      * Set the value of DESTINATION_NAME
+     * Nome completo do cliente
      *
      * @param string $destination_name
      */
     public function setDestinationName(string $destination_name)
     {
-        $this->destination_name = $destination_name;
-    }
-
-    /**
-     * Get the value of DESTINATION_TAXID
-     *
-     * @return int
-     */
-    public function getDestinationTaxid()
-    {
-        return $this->destination_taxid;
+        $this->collection->put('destination_name', $destination_name);
     }
 
     /**
@@ -103,19 +36,9 @@ class Destinatario extends Resource
      *
      * @param int $destination_taxid
      */
-    public function setDestinationTaxid(string $destination_taxid)
+    public function setDestinationTaxid(int $destination_taxid)
     {
-        $this->destination_taxid = $destination_taxid;
-    }
-
-    /**
-     * Get the value of DESTINATION_IE
-     *
-     * @return string
-     */
-    public function getDestinationIe()
-    {
-        return $this->destination_ie;
+        $this->collection->put('destination_taxid', $destination_taxid);
     }
 
     /**
@@ -126,17 +49,7 @@ class Destinatario extends Resource
      */
     public function setDestinationIe(string $destination_ie)
     {
-        $this->destination_ie = $destination_ie;
-    }
-
-    /**
-     * Get the value of DESTINATION_IM
-     *
-     * @return string
-     */
-    public function getDestinationIm()
-    {
-        return $this->destination_im;
+        $this->collection->put('destination_ie', $destination_ie);
     }
 
     /**
@@ -147,17 +60,7 @@ class Destinatario extends Resource
      */
     public function setDestinationIm(string $destination_im)
     {
-        $this->destination_im = $destination_im;
-    }
-
-    /**
-     * Get the value of DESTINATION_TAXTYPE
-     *
-     * @return string
-     */
-    public function getDestinationTaxtype()
-    {
-        return $this->destination_taxtype;
+        $this->collection->put('destination_im', $destination_im);
     }
 
     /**
@@ -168,17 +71,14 @@ class Destinatario extends Resource
      */
     public function setDestinationTaxtype(string $destination_taxtype)
     {
-        $this->destination_taxtype = $destination_taxtype;
-    }
+        $valoresAceitos = ['F', 'J', 'E'];
+        $destination_taxtype = Str::upper($destination_taxtype);
 
-    /**
-     * Get the value of DESTINATION_STREET
-     *
-     * @return string
-     */
-    public function getDestinationStreet()
-    {
-        return $this->destination_street;
+        if (! in_array($destination_taxtype, $valoresAceitos)) {
+            throw new \Exception("O tipo do destinatário (taxtype) precisa ser um dos seguintes valores: 'F', 'J' ou 'E'", 1);
+        }
+
+        $this->collection->put('destination_taxtype', $destination_taxtype);
     }
 
     /**
@@ -189,57 +89,29 @@ class Destinatario extends Resource
      */
     public function setDestinationStreet(string $destination_street)
     {
-        $this->destination_street = $destination_street;
-    }
-
-    /**
-     * Get the value of DESTINATION_NUMBER
-     *
-     * @return string
-     */
-    public function getDestinationNumber()
-    {
-        return $this->destination_number;
+        $this->collection->put('destination_street', $destination_street);
     }
 
     /**
      * Set the value of DESTINATION_NUMBER
+     * Número
      *
      * @param string $destination_number
      */
     public function setDestinationNumber(string $destination_number)
     {
-        $this->destination_number = $destination_number;
-    }
-
-    /**
-     * Get the value of DESTINATION_COMPLEMENT
-     *
-     * @return string
-     */
-    public function getDestinationComplement()
-    {
-        return $this->destination_complement;
+        $this->collection->put('destination_number', $destination_number);
     }
 
     /**
      * Set the value of DESTINATION_COMPLEMENT
+     * Complemento
      *
      * @param string $destination_complement
      */
-    public function setDestinationComplement(string $destination_complement)
+    public function setDestinationComplement(string $destination_complement = '')
     {
-        $this->destination_complement = $destination_complement;
-    }
-
-    /**
-     * Get the value of DESTINATION_DISTRICT
-     *
-     * @return string
-     */
-    public function getDestinationDistrict()
-    {
-        return $this->destination_district;
+        $this->collection->put('destination_complement', $destination_complement);
     }
 
     /**
@@ -250,17 +122,7 @@ class Destinatario extends Resource
      */
     public function setDestinationDistrict(string $destination_district)
     {
-        $this->destination_district = $destination_district;
-    }
-
-    /**
-     * Get the value of DESTINATION_CITY
-     *
-     * @return string
-     */
-    public function getDestinationCity()
-    {
-        return $this->destination_city;
+        $this->collection->put('destination_district', $destination_district);
     }
 
     /**
@@ -271,37 +133,24 @@ class Destinatario extends Resource
      */
     public function setDestinationCity(string $destination_city)
     {
-        $this->destination_city = $destination_city;
-    }
-
-    /**
-     * Get the value of DESTINATION_UF
-     *
-     * @return int
-     */
-    public function getDestinationUf()
-    {
-        return $this->destination_uf;
+        $this->collection->put('destination_city', $destination_city);
     }
 
     /**
      * Set the value of DESTINATION_UF
+     * Estado
      *
      * @param int $destination_uf
      */
     public function setDestinationUf(string $destination_uf)
     {
-        $this->destination_uf = $destination_uf;
-    }
+        $estadosBrasileiros = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
 
-    /**
-     * Get the value of DESTINATION_ZIPCODE
-     *
-     * @return string
-     */
-    public function getDestinationZipcode()
-    {
-        return $this->destination_zipcode;
+        if (!in_array($destination_uf, $estadosBrasileiros)) {
+            throw new Exception('Estado do destinatário (UF) não existe!', 1);
+        }
+
+        $this->collection->put('destination_uf', $destination_uf);
     }
 
     /**
@@ -312,59 +161,29 @@ class Destinatario extends Resource
      */
     public function setDestinationZipcode(string $destination_zipcode)
     {
-        $this->destination_zipcode = $destination_zipcode;
-    }
-
-    /**
-     * Get the value of DESTINATION_PHONE
-     *
-     * @return int
-     */
-    public function getDestinationPhone()
-    {
-        return $this->destination_phone;
+        $this->collection->put('destination_zipcode', $destination_zipcode);
     }
 
     /**
      * Set the value of DESTINATION_PHONE
+     * Telefone
      *
-     * @param int $destination_phone
+     * @param string $destination_phone
      */
-    public function setDestinationPhone(string $destination_phone)
+    public function setDestinationPhone(string $destination_phone = '')
     {
-        $this->destination_phone = $destination_phone;
-    }
-
-    /**
-     * Get the value of DESTINATION_EMAIL
-     *
-     * @return string
-     */
-    public function getDestinationEmail()
-    {
-        return $this->destination_email;
+        $this->collection->put('destination_phone', $destination_phone);
     }
 
     /**
      * Set the value of DESTINATION_EMAIL
+     * E-mail
      *
      * @param string $destination_email
      */
     public function setDestinationEmail(string $destination_email)
     {
-        $this->destination_email = $destination_email;
-    }
-
-    /**
-     * Get the value of DESTINATION_EMAIL_SEND
-     * Esse parâmetro é um Array que irá conter os e-mails que será enviado após a nota ser autorizada ou cancelada.
-     * OBS: Para cada e-mail que será enviado, passe os parâmetros abaixo alterando o índice em +1 para cada e-mail
-     *
-     * @return array
-     */
-    public function getDestinationEmailSend()
-    {
-        return $this->destination_email_send;
+        $this->collection->put('destination_email', $destination_email);
     }
 
     /**
@@ -376,6 +195,11 @@ class Destinatario extends Resource
      */
     public function setDestinationEmailSend(array $destination_email_send)
     {
-        $this->destination_email_send = $destination_email_send;
+        $this->collection->put('destination_email_send', $destination_email_send);
+    }
+
+    public function mount()
+    {
+        return $this->collection->toArray();
     }
 }

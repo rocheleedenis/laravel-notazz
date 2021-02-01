@@ -9,12 +9,12 @@ class Client
     const STATUS_SUCESSO = 'sucesso';
     const STATUS_ERRO    = 'erro';
 
-    const COD_SUCESSO                 = 000;
-    const COD_REQUISICAO_SIMULTANEA   = 120;
-    const COD_API_EM_MANUTENCAO       = 999;
-    const COD_APIKEY_NAO_LIBERADA     = 305;
-    const COD_APIKEY_INVALIDA         = 303;
-    const COD_REGISTRO_NAO_ENCONTRADO = 202;
+    const COD_SUCESSO                 = '000';
+    const COD_REQUISICAO_SIMULTANEA   = '120';
+    const COD_API_EM_MANUTENCAO       = '999';
+    const COD_APIKEY_NAO_LIBERADA     = '305';
+    const COD_APIKEY_INVALIDA         = '303';
+    const COD_REGISTRO_NAO_ENCONTRADO = '202';
 
     public function request(array $fields)
     {

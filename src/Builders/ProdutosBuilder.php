@@ -76,4 +76,9 @@ class ProdutosBuilder
     {
         return $this->produtos;
     }
+
+    public function sumItemsValue()
+    {
+        return $this->produtos->getSumItemsValue();
+    }
 }

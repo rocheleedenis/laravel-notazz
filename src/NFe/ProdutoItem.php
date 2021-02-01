@@ -2,85 +2,27 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\Resource;
+use Illuminate\Support\Collection;
 
-class ProdutoItem extends Resource
+class ProdutoItem extends Collection
 {
     /**
-     * @var int
+     * Collection object.
+     *
+     * @var Collection
      */
-    protected $document_product_cod;
-    /**
-     * @var int
-     */
-    protected $document_product_tax_cod;
-    /**
-     * @var mixed
-     */
-    protected $document_product_ean;
-    /**
-     * @var string
-     */
-    protected $document_product_name;
-    /**
-     * @var int
-     */
-    protected $document_product_qtd;
-    /**
-     * @var float
-     */
-    protected $document_product_unitary_value;
-    /**
-     * @var int
-     */
-    protected $document_product_ncm;
-    /**
-     * @var int
-     */
-    protected $document_product_cest;
-    /**
-     * @var int
-     */
-    protected $document_product_cfop;
-    /**
-     * @var float
-     */
-    protected $document_product_discount;
-    /**
-     * @var int
-     */
-    protected $document_product_icms_cst;
-    /**
-     * @var float
-     */
-    protected $document_product_icms_aliquota;
-    /**
-     * @var int
-     */
-    protected $document_product_ipi_cst;
-    /**
-     * @var float
-     */
-    protected $document_product_ipi_aliquota;
-    /**
-     * @var float
-     */
-    protected $document_product_pis_aliquota;
-    /**
-     * @var float
-     */
-    protected $document_product_cofins_cst;
-    /**
-     * @var float
-     */
-    protected $document_product_cofins_aliquota;
+    public $collection;
 
+    public function __construct()
+    {
+        $this->collection = collect();
+    }
 
     public function fillRequired(int $cod, string $name, int $qtd, float $unitaryValue)
     {
-        $this->document_product_cod = $cod;
-        $this->document_product_name = $name;
-        $this->document_product_qtd = $qtd;
+        $this->document_product_cod           = $cod;
+        $this->document_product_name          = $name;
+        $this->document_product_qtd           = $qtd;
         $this->document_product_unitary_value = $unitaryValue;
     }
 
@@ -91,7 +33,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductCod()
     {
-        return $this->document_product_cod;
+        return (string) $this->document_product_cod;
     }
 
     /**
@@ -101,7 +43,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductCod(int $document_product_cod)
     {
-        $this->document_product_cod = $document_product_cod;
+        $this->collection->put('document_product_cod', (string) $document_product_cod);
     }
 
     /**
@@ -111,7 +53,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductTaxCod()
     {
-        return $this->document_product_tax_cod;
+        return (string) $this->document_product_tax_cod;
     }
 
     /**
@@ -121,7 +63,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductTaxCod(int $document_product_tax_cod)
     {
-        $this->document_product_tax_cod = $document_product_tax_cod;
+        $this->collection->put('document_product_tax_cod', (string) $document_product_tax_cod);
     }
 
     /**
@@ -131,7 +73,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductEan()
     {
-        return $this->document_product_ean;
+        return (string) $this->document_product_ean;
     }
 
     /**
@@ -141,7 +83,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductEan($document_product_ean)
     {
-        $this->document_product_ean = $document_product_ean;
+        $this->collection->put('document_product_ean', (string) $document_product_ean);
     }
 
     /**
@@ -151,7 +93,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductName()
     {
-        return $this->document_product_name;
+        return (string) $this->document_product_name;
     }
 
     /**
@@ -161,7 +103,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductName(string $document_product_name)
     {
-        $this->document_product_name = $document_product_name;
+        $this->collection->put('document_product_name', (string) $document_product_name);
     }
 
     /**
@@ -171,7 +113,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductQtd()
     {
-        return $this->document_product_qtd;
+        return (string) $this->document_product_qtd;
     }
 
     /**
@@ -181,7 +123,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductQtd(int $document_product_qtd)
     {
-        $this->document_product_qtd = $document_product_qtd;
+        $this->collection->put('document_product_qtd', (string) $document_product_qtd);
     }
 
     /**
@@ -191,7 +133,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductUnitaryValue()
     {
-        return $this->document_product_unitary_value;
+        return (string) $this->document_product_unitary_value;
     }
 
     /**
@@ -201,7 +143,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductUnitaryValue(float $document_product_unitary_value)
     {
-        $this->document_product_unitary_value = $document_product_unitary_value;
+        $this->collection->put('document_product_unitary_value', (string)$document_product_unitary_value);
     }
 
     /**
@@ -211,7 +153,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductNcm()
     {
-        return $this->document_product_ncm;
+        return (string) $this->document_product_ncm;
     }
 
     /**
@@ -221,7 +163,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductNcm(int $document_product_ncm)
     {
-        $this->document_product_ncm = $document_product_ncm;
+        $this->collection->put('document_product_ncm', (string) $document_product_ncm);
     }
 
     /**
@@ -231,7 +173,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductCest()
     {
-        return $this->document_product_cest;
+        return (string) $this->document_product_cest;
     }
 
     /**
@@ -241,7 +183,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductCest(int $document_product_cest)
     {
-        $this->document_product_cest = $document_product_cest;
+        $this->collection->put('document_product_cest', (string) $document_product_cest);
     }
 
     /**
@@ -251,7 +193,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductCfop()
     {
-        return $this->document_product_cfop;
+        return (string) $this->document_product_cfop;
     }
 
     /**
@@ -261,7 +203,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductCfop(int $document_product_cfop)
     {
-        $this->document_product_cfop = $document_product_cfop;
+        $this->collection->put('document_product_cfop', (string) $document_product_cfop);
     }
 
     /**
@@ -271,7 +213,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductDiscount()
     {
-        return $this->document_product_discount;
+        return (string) $this->document_product_discount;
     }
 
     /**
@@ -281,7 +223,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductDiscount(float $document_product_discount)
     {
-        $this->document_product_discount = $document_product_discount;
+        $this->collection->put('document_product_discount', (string) $document_product_discount);
     }
 
     /**
@@ -297,11 +239,11 @@ class ProdutoItem extends Resource
     /**
      * Set the value of DOCUMENT_PRODUCT_ICMS_CST
      *
-     * @param int $document_product_icms_cst
+     * @param string $document_product_icms_cst
      */
-    public function setDocumentProductIcmsCst(int $document_product_icms_cst)
+    public function setDocumentProductIcmsCst(string $document_product_icms_cst)
     {
-        $this->document_product_icms_cst = $document_product_icms_cst;
+        $this->collection->put('document_product_icms_cst', (string) $document_product_icms_cst);
     }
 
     /**
@@ -311,7 +253,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductIcmsAliquota()
     {
-        return $this->document_product_icms_aliquota;
+        return (string) $this->document_product_icms_aliquota;
     }
 
     /**
@@ -321,7 +263,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductIcmsAliquota(float $document_product_icms_aliquota)
     {
-        $this->document_product_icms_aliquota = $document_product_icms_aliquota;
+        $this->collection->put('document_product_icms_aliquota', (string) $document_product_icms_aliquota);
     }
 
     /**
@@ -331,7 +273,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductIpiCst()
     {
-        return $this->document_product_ipi_cst;
+        return (string) $this->document_product_ipi_cst;
     }
 
     /**
@@ -341,7 +283,7 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductIpiCst(int $document_product_ipi_cst)
     {
-        $this->document_product_ipi_cst = $document_product_ipi_cst;
+        $this->collection->put('document_product_ipi_cst', (string) $document_product_ipi_cst);
     }
 
     /**
@@ -351,7 +293,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductIpiAliquota()
     {
-        return $this->document_product_ipi_aliquota;
+        return (string) $this->document_product_ipi_aliquota;
     }
 
     /**
@@ -361,7 +303,27 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductIpiAliquota(float $document_product_ipi_aliquota)
     {
-        $this->document_product_ipi_aliquota = $document_product_ipi_aliquota;
+        $this->collection->put('document_product_ipi_aliquota', (string) $document_product_ipi_aliquota);
+    }
+
+    /**
+     * Get the value of DOCUMENT_PRODUCT_PIS_CST
+     *
+     * @return string
+     */
+    public function getDocumentProductPisCst()
+    {
+        return (string) (string) $this->document_product_pis_cst;
+    }
+
+    /**
+     * Set the value of DOCUMENT_PRODUCT_PIS_CST
+     *
+     * @param int|string $document_product_pis_cst
+     */
+    public function setDocumentProductPiscst(string $document_product_pis_cst)
+    {
+        $this->collection->put('document_product_pis_cst', (string) $document_product_pis_cst);
     }
 
     /**
@@ -371,7 +333,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductPisAliquota()
     {
-        return $this->document_product_pis_aliquota;
+        return (string) $this->document_product_pis_aliquota;
     }
 
     /**
@@ -381,17 +343,17 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductPisAliquota(float $document_product_pis_aliquota)
     {
-        $this->document_product_pis_aliquota = $document_product_pis_aliquota;
+        $this->collection->put('document_product_pis_aliquota', (string) $document_product_pis_aliquota);
     }
 
     /**
      * Get the value of DOCUMENT_PRODUCT_COFINS_CST
      *
-     * @return float
+     * @return string
      */
     public function getDocumentProductCofinsCst()
     {
-        return $this->document_product_cofins_cst;
+        return (string) $this->document_product_cofins_cst;
     }
 
     /**
@@ -399,9 +361,9 @@ class ProdutoItem extends Resource
      *
      * @param float $document_product_cofins_cst
      */
-    public function setDocumentProductCofinsCst(float $document_product_cofins_cst)
+    public function setDocumentProductCofinsCst(string $document_product_cofins_cst)
     {
-        $this->document_product_cofins_cst = $document_product_cofins_cst;
+        $this->collection->put('document_product_cofins_cst', (string) $document_product_cofins_cst);
     }
 
     /**
@@ -411,7 +373,7 @@ class ProdutoItem extends Resource
      */
     public function getDocumentProductCofinsAliquota()
     {
-        return $this->document_product_cofins_aliquota;
+        return (string) $this->document_product_cofins_aliquota;
     }
 
     /**
@@ -421,6 +383,6 @@ class ProdutoItem extends Resource
      */
     public function setDocumentProductCofinsAliquota(float $document_product_cofins_aliquota)
     {
-        $this->document_product_cofins_aliquota = $document_product_cofins_aliquota;
+        $this->collection->put('document_product_cofins_aliquota', (string) $document_product_cofins_aliquota);
     }
 }

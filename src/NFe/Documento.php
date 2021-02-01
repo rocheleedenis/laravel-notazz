@@ -2,75 +2,33 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\Resource;
-
-class Documento extends Resource
+class Documento
 {
     /**
-     * Valor total da nota
+     * Collection object.
      *
-     * @var float
+     * @var Collection
      */
-    protected $document_basevalue;
-    /**
-     * @var int
-     */
-    protected $document_cnae;
-    /**
-     * @var int
-     */
-    protected $document_goal;
-    /**
-     * @var int
-     */
-    protected $document_referenced;
-    /**
-     * @var int
-     */
-    protected $document_operation_type;
-    /**
-     * @var string
-     */
-    protected $document_nature_operation;
-    /**
-     * @var string
-     */
-    protected $document_description;
-    /**
-     * @var string
-     */
-    protected $document_issue_date;
+    protected $collection;
 
-    /**
-     *
-     * @return float
-     */
-    public function getDocumentBasevalue()
+    public function __construct()
     {
-        return $this->document_basevalue;
+        $this->collection = collect();
     }
 
     /**
+     * Set the value of DOCUMENT_BASEVALUE
      * Valor da nota fiscal
      *
      * @param float $document_basevalue
      */
     public function setDocumentBasevalue(float $document_basevalue)
     {
-        $this->document_basevalue = $document_basevalue;
+        $this->collection->put('document_basevalue', (string) $document_basevalue);
     }
 
     /**
-     * Get the value of DOCUMENT_CNAE
-     *
-     * @return int
-     */
-    public function getDocumentCnae()
-    {
-        return $this->document_cnae;
-    }
-
-    /**
+     * Set the value of DOCUMENT_CNAE
      * CNAE. Documentação: http://www.cnae.ibge.gov.br
      *
      * @param int $document_cnae
@@ -79,119 +37,76 @@ class Documento extends Resource
      */
     public function setDocumentCnae(int $document_cnae)
     {
-        $this->document_cnae = $document_cnae;
+        $this->collection->put('document_cnae', (string) $document_cnae);
 
         return $this;
     }
 
     /**
-     * Get the value of DOCUMENT_GOAL
-     *
-     * @return int
-     */
-    public function getDocumentGoal()
-    {
-        return $this->document_goal;
-    }
-
-    /**
+     * Set the value of DOCUMENT_GOAL
      * Finalidade da Nota Fiscal. 1 = Normal, 2 = Complementar, 3 = Ajuste, 4 = Devolução/Retorno
      *
      * @param int $document_goal
      */
     public function setDocumentGoal(int $document_goal)
     {
-        $this->document_goal = $document_goal;
+        $goals = [1, 2, 3, 4];
+
+        if (!in_array($document_goal, $goals)) {
+            throw new Exception('Finalidade (goal) da nota fiscal não definida!', 1);
+        }
+
+        $this->collection->put('document_goal', (string) $document_goal);
     }
 
     /**
-     * Get the value of DOCUMENT_REFERENCED
-     *
-     * @return int
-     */
-    public function getDocumentReferenced()
-    {
-        return $this->document_referenced;
-    }
-
-    /**
+     * Set the value of DOCUMENT_REFERENCED
      * Chave da nota fiscal referenciada. Utilizar quando DOCUMENT_GOAL for diferente de 1
      *
      * @param int $document_referenced
      */
     public function setDocumentReferenced(int $document_referenced)
     {
-        $this->document_referenced = $document_referenced;
+        $this->collection->put('document_referenced', (string) $document_referenced);
     }
 
     /**
-     * Get the value of DOCUMENT_OPERATION_TYPE
-     *
-     * @return int
-     */
-    public function getDocumentOperationType()
-    {
-        return $this->document_operation_type;
-    }
-
-    /**
+     * Set the value of DOCUMENT_OPERATION_TYPE
      * Tipo de Operação. 0 = Entrada, 1 = Saída
      *
      * @param int $document_operation_type
      */
     public function setDocumentOperationType(int $document_operation_type)
     {
-        $this->document_operation_type = $document_operation_type;
+        $tiposOperacao = [0, 1];
+
+        if (!in_array($document_operation_type, $tiposOperacao)) {
+            throw new Exception('Tipo de operação (operationType) da nota fiscal não definida!', 1);
+        }
+
+        $this->collection->put('document_operation_type', (string) $document_operation_type);
     }
 
     /**
-     * Get the value of DOCUMENT_NATURE_OPERATION
-     *
-     * @return string
-     */
-    public function getDocumentNatureOperation()
-    {
-        return $this->document_nature_operation;
-    }
-
-    /**
+     * Set the value of DOCUMENT_NATURE_OPERATION
      * Natureza da operação da nota fiscal
      *
      * @param string $document_nature_operation
      */
     public function setDocumentNatureOperation(string $document_nature_operation)
     {
-        $this->document_nature_operation = $document_nature_operation;
+        $this->collection->put('document_nature_operation', (string) $document_nature_operation);
     }
 
     /**
-     * Get the value of DOCUMENT_DESCRIPTION
-     *
-     * @return string
-     */
-    public function getDocumentDescription()
-    {
-        return $this->document_description;
-    }
-
-    /**
+     * Set the value of DOCUMENT_DESCRIPTION
      * Descrição da nota fiscal
      *
      * @param string $document_description
      */
     public function setDocumentDescription(string $document_description)
     {
-        $this->document_description = $document_description;
-    }
-
-    /**
-     * Get the value of DOCUMENT_ISSUE_DATE
-     *
-     * @return string
-     */
-    public function getDocumentIssueDate()
-    {
-        return $this->document_issue_date;
+        $this->collection->put('document_description', (string) $document_description);
     }
 
     /**
@@ -201,6 +116,11 @@ class Documento extends Resource
      */
     public function setDocumentIssueDate(string $document_issue_date)
     {
-        $this->document_issue_date = $document_issue_date;
+        $this->collection->put('document_issue_date', (string) $document_issue_date);
+    }
+
+    public function mount()
+    {
+        return $this->collection->toArray();
     }
 }
