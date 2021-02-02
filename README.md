@@ -13,14 +13,6 @@ Instalação via linha de comando:
 
 `$ composer require rocheleedenis/laravel-notazz`
 
-Ou adicionando ao seu arquivo composer.json:
-
-```json
-{
-    "rocheleedenis/laravel-notazz": "~0.8"
-}
-```
-
 ## Modo de usar
 
 Para criar uma NF-e (Nota Fiscal de Produto) com apenas os campos obrigatórios:
