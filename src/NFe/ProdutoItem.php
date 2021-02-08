@@ -27,33 +27,13 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_COD
-     *
-     * @return int
-     */
-    public function getDocumentProductCod()
-    {
-        return (string) $this->document_product_cod;
-    }
-
-    /**
      * Cód do produto
      *
      * @param int $document_product_cod
      */
-    public function setDocumentProductCod(int $document_product_cod)
+    public function setDocumentProductCod(string $document_product_cod)
     {
-        $this->collection->put('document_product_cod', (string) $document_product_cod);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_TAX_COD
-     *
-     * @return int
-     */
-    public function getDocumentProductTaxCod()
-    {
-        return (string) $this->document_product_tax_cod;
+        $this->collection->put('document_product_cod', $document_product_cod);
     }
 
     /**
@@ -67,16 +47,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_EAN
-     *
-     * @return string
-     */
-    public function getDocumentProductEan()
-    {
-        return (string) $this->document_product_ean;
-    }
-
-    /**
      * Código de barras
      *
      * @param mixed $document_product_ean
@@ -84,16 +54,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductEan($document_product_ean)
     {
         $this->collection->put('document_product_ean', (string) $document_product_ean);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_NAME
-     *
-     * @return string
-     */
-    public function getDocumentProductName()
-    {
-        return (string) $this->document_product_name;
     }
 
     /**
@@ -107,16 +67,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_QTD
-     *
-     * @return int
-     */
-    public function getDocumentProductQtd()
-    {
-        return (string) $this->document_product_qtd;
-    }
-
-    /**
      * Quantidade de itens
      *
      * @param int $document_product_qtd
@@ -124,16 +74,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductQtd(int $document_product_qtd)
     {
         $this->collection->put('document_product_qtd', (string) $document_product_qtd);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_UNITARY_VALUE
-     *
-     * @return float
-     */
-    public function getDocumentProductUnitaryValue()
-    {
-        return (string) $this->document_product_unitary_value;
     }
 
     /**
@@ -147,16 +87,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_NCM
-     *
-     * @return int
-     */
-    public function getDocumentProductNcm()
-    {
-        return (string) $this->document_product_ncm;
-    }
-
-    /**
      * Set the value of DOCUMENT_PRODUCT_NCM
      *
      * @param int $document_product_ncm
@@ -164,16 +94,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductNcm(int $document_product_ncm)
     {
         $this->collection->put('document_product_ncm', (string) $document_product_ncm);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_CEST
-     *
-     * @return int
-     */
-    public function getDocumentProductCest()
-    {
-        return (string) $this->document_product_cest;
     }
 
     /**
@@ -187,16 +107,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_CFOP
-     *
-     * @return int
-     */
-    public function getDocumentProductCfop()
-    {
-        return (string) $this->document_product_cfop;
-    }
-
-    /**
      * Set the value of DOCUMENT_PRODUCT_CFOP
      *
      * @param int $document_product_cfop
@@ -204,16 +114,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductCfop(int $document_product_cfop)
     {
         $this->collection->put('document_product_cfop', (string) $document_product_cfop);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_DISCOUNT
-     *
-     * @return float
-     */
-    public function getDocumentProductDiscount()
-    {
-        return (string) $this->document_product_discount;
     }
 
     /**
@@ -227,16 +127,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_ICMS_CST
-     *
-     * @return int
-     */
-    public function getDocumentProductIcmsCst()
-    {
-        return $this->document_product_icms_cst;
-    }
-
-    /**
      * Set the value of DOCUMENT_PRODUCT_ICMS_CST
      *
      * @param string $document_product_icms_cst
@@ -244,16 +134,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductIcmsCst(string $document_product_icms_cst)
     {
         $this->collection->put('document_product_icms_cst', (string) $document_product_icms_cst);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_ICMS_ALIQUOTA
-     *
-     * @return float
-     */
-    public function getDocumentProductIcmsAliquota()
-    {
-        return (string) $this->document_product_icms_aliquota;
     }
 
     /**
@@ -267,16 +147,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_IPI_CST
-     *
-     * @return int
-     */
-    public function getDocumentProductIpiCst()
-    {
-        return (string) $this->document_product_ipi_cst;
-    }
-
-    /**
      * Set the value of DOCUMENT_PRODUCT_IPI_CST
      *
      * @param int $document_product_ipi_cst
@@ -284,16 +154,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductIpiCst(int $document_product_ipi_cst)
     {
         $this->collection->put('document_product_ipi_cst', (string) $document_product_ipi_cst);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_IPI_ALIQUOTA
-     *
-     * @return float
-     */
-    public function getDocumentProductIpiAliquota()
-    {
-        return (string) $this->document_product_ipi_aliquota;
     }
 
     /**
@@ -307,16 +167,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_PIS_CST
-     *
-     * @return string
-     */
-    public function getDocumentProductPisCst()
-    {
-        return (string) (string) $this->document_product_pis_cst;
-    }
-
-    /**
      * Set the value of DOCUMENT_PRODUCT_PIS_CST
      *
      * @param int|string $document_product_pis_cst
@@ -324,16 +174,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductPiscst(string $document_product_pis_cst)
     {
         $this->collection->put('document_product_pis_cst', (string) $document_product_pis_cst);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_PIS_ALIQUOTA
-     *
-     * @return float
-     */
-    public function getDocumentProductPisAliquota()
-    {
-        return (string) $this->document_product_pis_aliquota;
     }
 
     /**
@@ -347,16 +187,6 @@ class ProdutoItem extends Collection
     }
 
     /**
-     * Get the value of DOCUMENT_PRODUCT_COFINS_CST
-     *
-     * @return string
-     */
-    public function getDocumentProductCofinsCst()
-    {
-        return (string) $this->document_product_cofins_cst;
-    }
-
-    /**
      * Set the value of DOCUMENT_PRODUCT_COFINS_CST
      *
      * @param float $document_product_cofins_cst
@@ -364,16 +194,6 @@ class ProdutoItem extends Collection
     public function setDocumentProductCofinsCst(string $document_product_cofins_cst)
     {
         $this->collection->put('document_product_cofins_cst', (string) $document_product_cofins_cst);
-    }
-
-    /**
-     * Get the value of DOCUMENT_PRODUCT_COFINS_ALIQUOTA
-     *
-     * @return float
-     */
-    public function getDocumentProductCofinsAliquota()
-    {
-        return (string) $this->document_product_cofins_aliquota;
     }
 
     /**

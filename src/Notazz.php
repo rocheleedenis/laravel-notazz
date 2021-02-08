@@ -5,13 +5,12 @@ namespace RocheleEdenis\LaravelNotazz;
 use RocheleEdenis\LaravelNotazz\Client\Client;
 use RocheleEdenis\LaravelNotazz\Builders\NotaFiscalBuilder;
 
-class Notazz extends NotaFiscalBuilder
+class Notazz
 {
     /**
-     * @var string
+     * @var NotaFiscalBuilder
      */
-    protected $nfeType;
-
+    protected $nota;
     /**
      * @var Client
      */
@@ -21,17 +20,25 @@ class Notazz extends NotaFiscalBuilder
      * @param string
      * @param mixed
      */
-    public function __construct(string $nfeType = null)
+    public function __construct()
     {
-        parent::__construct();
-
-        $this->nfeType = $nfeType;
-
         $this->client = new Client;
     }
 
     public function registrar()
     {
-        return $this->client->request($this->mount());
+        return $this->client->request($this->nota->mount());
+    }
+
+    public function nfe()
+    {
+        $this->nota = new NotaFiscalBuilder('produto');
+
+        return $this->nota;
+    }
+
+    public function nfeToArray()
+    {
+        return $this->nota->mount();
     }
 }

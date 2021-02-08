@@ -36,9 +36,9 @@ class Destinatario
      *
      * @param int $destination_taxid
      */
-    public function setDestinationTaxid(int $destination_taxid)
+    public function setDestinationTaxid(string $destination_taxid)
     {
-        $this->collection->put('destination_taxid', (string) $destination_taxid);
+        $this->collection->put('destination_taxid', $destination_taxid);
     }
 
     /**

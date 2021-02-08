@@ -1,10 +1,18 @@
+[![Packagist](https://img.shields.io/packagist/v/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-boleto)
+
+[![Packagist](https://img.shields.io/packagist/dt/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-notazz)
+
+[![Packagist](https://img.shields.io/packagist/l/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-notazz)
+
+[![GitHub forks](https://img.shields.io/github/forks/rocheleedenis/laravel-notazz.svg?style=social&label=Fork)](https://github.com/rocheleedenis/laravel-notazz)
+
 # Laravel Notazz
 
 Pacote para facilitar integração com o sistema de emissão de notas fiscais Notazz.
 
 ## Instalação
 
-**Requerimentos**
+### Requerimentos
 
 - [Php 7.2](http://php.net/releases/7_0_0.php)
 - [Laravel 5.8](https://laravel.com/docs/5.8)
@@ -69,6 +77,9 @@ $notazz->registrar();
 
 // Retorna a soma do valor dos itens da nota fiscal
 $notazz->sumItemsValue();
+
+// Retorna o array com a nota ja montada
+$notazz->nfeToArray();
 ```
 
 **Importante!**
