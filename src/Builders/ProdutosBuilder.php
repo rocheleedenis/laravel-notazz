@@ -9,13 +9,22 @@ use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
 
 class ProdutosBuilder
 {
+    /**
+     * @var Produtos
+     */
     protected $produtos;
+    /**
+     * @var ProdutoItem
+     */
     protected $produtoItem;
-    protected $adding;
+    /**
+     * @var bool
+     */
+    protected $adding = false;
 
     public function __construct()
     {
-        $this->produtos = new Produtos();
+        $this->produtos = app(Produtos::class);
     }
 
     public function __call(string $method, array $args)
@@ -27,7 +36,7 @@ class ProdutosBuilder
         $method = "setDocumentProduct$method";
 
         if (false === method_exists($this->produtoItem, $method)) {
-            throw new MethodNotFoundException("Method ($method) not found in class " . get_class($this->produtoItem));
+            throw new MethodNotFoundException("Método ($method) não encontrado na classe " . get_class($this->produtoItem));
         }
 
         $this->produtoItem->$method($args[0]);

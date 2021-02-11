@@ -47,7 +47,7 @@ class NotaFiscalBuilder
      */
     protected $nota;
 
-    public function __construct(string $nfeType)
+    public function __construct(string $nfeType = null)
     {
         $this->nfeType = $nfeType;
 
@@ -70,6 +70,19 @@ class NotaFiscalBuilder
         $target = $this->current;
 
         $this->$target->$method($arg);
+
+        return $this;
+    }
+
+    /**
+     * Define o tipo da nota fiscal
+     *
+     * @param string $api_key
+     * @return $this
+     */
+    public function nfe()
+    {
+        $this->nfeType = 'produto';
 
         return $this;
     }
@@ -148,42 +161,39 @@ class NotaFiscalBuilder
     }
 
     // ------------ x -------------
-    public function isNFSe(): bool
+    public function isNFe()
     {
-        return (bool) $this->nfeType === 'service';
+        return $this->nfeType === 'produto';
     }
 
     protected function getNFObject()
     {
-        if ($this->isNFSe()) {
-            // return new NFSe(
-            //     $this->destination->getInstance(),
-            //     $this->document->getInstance(),
-            //     $this->service->getInstance()
-            // );
+        if ($this->isNFe()) {
+            return new NFe(
+                $this->destinatario->getInstance(),
+                $this->documento->getInstance(),
+                $this->produtos->getInstance()
+                // $this->shipping->getInstance()
+            );
         }
 
-        return new NFe(
-            $this->destinatario->getInstance(),
-            $this->documento->getInstance(),
-            $this->produtos->getInstance()
-            // $this->shipping->getInstance()
-        );
+        // return new NFSe(
+        //     $this->destination->getInstance(),
+        //     $this->document->getInstance(),
+        //     $this->service->getInstance()
+        // );
     }
 
-    public function mount()
+    public function toArray()
     {
-        $collection = collect([
+        $singleAttributes = collect([
             'API_KEY'      => $this->api_key,
             'ISSUER_TAXID' => $this->issuer_taxid,
             'EXTERNAL_ID'  => $this->external_id,
             'SALE_ID'      => $this->sale_id,
-        ]);
+        ])->filter()->all();
 
-        return array_merge(
-            $collection->filter()->all(),
-            $this->getNFObject()->mount()
-        );
+        return array_merge($singleAttributes, $this->getNFObject()->toArray());
     }
 
     public function sumItemsValue()

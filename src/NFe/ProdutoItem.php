@@ -3,206 +3,239 @@
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
 use Illuminate\Support\Collection;
+use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
 class ProdutoItem extends Collection
 {
+    const REQUIRED_PROPERTIES = [
+        'document_product_cod',
+        'document_product_name',
+        'document_product_qtd',
+        'document_product_unitary_value',
+    ];
+
     /**
-     * Collection object.
+     * * Associative collection for storing property values.
      *
      * @var Collection
      */
-    public $collection;
+    public $content;
 
     public function __construct()
     {
-        $this->collection = collect();
-    }
-
-    public function fillRequired(int $cod, string $name, int $qtd, float $unitaryValue)
-    {
-        $this->document_product_cod           = $cod;
-        $this->document_product_name          = $name;
-        $this->document_product_qtd           = $qtd;
-        $this->document_product_unitary_value = $unitaryValue;
+        $this->content = collect();
     }
 
     /**
      * Cód do produto
      *
-     * @param int $document_product_cod
+     * @param int $value
      */
-    public function setDocumentProductCod(string $document_product_cod)
+    public function setDocumentProductCod(string $value)
     {
-        $this->collection->put('document_product_cod', $document_product_cod);
+        $this->content->put('document_product_cod', $value);
     }
 
     /**
      * Cód fiscal do produto (código da logística)
      *
-     * @param int $document_product_tax_cod
+     * @param int $value
      */
-    public function setDocumentProductTaxCod(int $document_product_tax_cod)
+    public function setDocumentProductTaxCod(int $value)
     {
-        $this->collection->put('document_product_tax_cod', (string) $document_product_tax_cod);
+        $this->content->put('document_product_tax_cod', (string) $value);
     }
 
     /**
      * Código de barras
      *
-     * @param mixed $document_product_ean
+     * @param mixed $value
      */
-    public function setDocumentProductEan($document_product_ean)
+    public function setDocumentProductEan($value)
     {
-        $this->collection->put('document_product_ean', (string) $document_product_ean);
+        $this->content->put('document_product_ean', (string) $value);
     }
 
     /**
      * Nome do produto
      *
-     * @param string $document_product_name
+     * @param string $value
      */
-    public function setDocumentProductName(string $document_product_name)
+    public function setDocumentProductName(string $value)
     {
-        $this->collection->put('document_product_name', (string) $document_product_name);
+        $this->content->put('document_product_name', (string) $value);
     }
 
     /**
      * Quantidade de itens
      *
-     * @param int $document_product_qtd
+     * @param int $value
      */
-    public function setDocumentProductQtd(int $document_product_qtd)
+    public function setDocumentProductQtd(int $value)
     {
-        $this->collection->put('document_product_qtd', (string) $document_product_qtd);
+        $this->content->put('document_product_qtd', (string) $value);
     }
 
     /**
      * Valor unitário do item
      *
-     * @param float $document_product_unitary_value
+     * @param float $value
      */
-    public function setDocumentProductUnitaryValue(float $document_product_unitary_value)
+    public function setDocumentProductUnitaryValue(float $value)
     {
-        $this->collection->put('document_product_unitary_value', (string)$document_product_unitary_value);
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_unitary_value', $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_NCM
      *
-     * @param int $document_product_ncm
+     * @param int $value
      */
-    public function setDocumentProductNcm(int $document_product_ncm)
+    public function setDocumentProductNcm(int $value)
     {
-        $this->collection->put('document_product_ncm', (string) $document_product_ncm);
+        $this->content->put('document_product_ncm', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_CEST
      *
-     * @param int $document_product_cest
+     * @param int $value
      */
-    public function setDocumentProductCest(int $document_product_cest)
+    public function setDocumentProductCest(int $value)
     {
-        $this->collection->put('document_product_cest', (string) $document_product_cest);
+        $this->content->put('document_product_cest', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_CFOP
      *
-     * @param int $document_product_cfop
+     * @param int $value
      */
-    public function setDocumentProductCfop(int $document_product_cfop)
+    public function setDocumentProductCfop(int $value)
     {
-        $this->collection->put('document_product_cfop', (string) $document_product_cfop);
+        $this->content->put('document_product_cfop', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_DISCOUNT
      *
-     * @param float $document_product_discount
+     * @param float $value
      */
-    public function setDocumentProductDiscount(float $document_product_discount)
+    public function setDocumentProductDiscount(float $value)
     {
-        $this->collection->put('document_product_discount', (string) $document_product_discount);
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_discount', $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_ICMS_CST
      *
-     * @param string $document_product_icms_cst
+     * @param string $value
      */
-    public function setDocumentProductIcmsCst(string $document_product_icms_cst)
+    public function setDocumentProductIcmsCst(string $value)
     {
-        $this->collection->put('document_product_icms_cst', (string) $document_product_icms_cst);
+        $this->content->put('document_product_icms_cst', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_ICMS_ALIQUOTA
      *
-     * @param float $document_product_icms_aliquota
+     * @param float $value
      */
-    public function setDocumentProductIcmsAliquota(float $document_product_icms_aliquota)
+    public function setDocumentProductIcmsAliquota(float $value)
     {
-        $this->collection->put('document_product_icms_aliquota', (string) $document_product_icms_aliquota);
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_icms_aliquota', $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_IPI_CST
      *
-     * @param int $document_product_ipi_cst
+     * @param int $value
      */
-    public function setDocumentProductIpiCst(int $document_product_ipi_cst)
+    public function setDocumentProductIpiCst(int $value)
     {
-        $this->collection->put('document_product_ipi_cst', (string) $document_product_ipi_cst);
+        $this->content->put('document_product_ipi_cst', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_IPI_ALIQUOTA
      *
-     * @param float $document_product_ipi_aliquota
+     * @param float $value
      */
-    public function setDocumentProductIpiAliquota(float $document_product_ipi_aliquota)
+    public function setDocumentProductIpiAliquota(float $value)
     {
-        $this->collection->put('document_product_ipi_aliquota', (string) $document_product_ipi_aliquota);
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_ipi_aliquota', $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_PIS_CST
      *
-     * @param int|string $document_product_pis_cst
+     * @param int|string $value
      */
-    public function setDocumentProductPiscst(string $document_product_pis_cst)
+    public function setDocumentProductPiscst(string $value)
     {
-        $this->collection->put('document_product_pis_cst', (string) $document_product_pis_cst);
+        $this->content->put('document_product_pis_cst', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_PIS_ALIQUOTA
      *
-     * @param float $document_product_pis_aliquota
+     * @param float $value
      */
-    public function setDocumentProductPisAliquota(float $document_product_pis_aliquota)
+    public function setDocumentProductPisAliquota(float $value)
     {
-        $this->collection->put('document_product_pis_aliquota', (string) $document_product_pis_aliquota);
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_pis_aliquota', $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_COFINS_CST
      *
-     * @param float $document_product_cofins_cst
+     * @param float $value
      */
-    public function setDocumentProductCofinsCst(string $document_product_cofins_cst)
+    public function setDocumentProductCofinsCst(string $value)
     {
-        $this->collection->put('document_product_cofins_cst', (string) $document_product_cofins_cst);
+        $this->content->put('document_product_cofins_cst', (string) $value);
     }
 
     /**
      * Set the value of DOCUMENT_PRODUCT_COFINS_ALIQUOTA
      *
-     * @param float $document_product_cofins_aliquota
+     * @param float $value
      */
-    public function setDocumentProductCofinsAliquota(float $document_product_cofins_aliquota)
+    public function setDocumentProductCofinsAliquota(float $value)
     {
-        $this->collection->put('document_product_cofins_aliquota', (string) $document_product_cofins_aliquota);
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_cofins_aliquota', $value);
+    }
+
+    /**
+     * Set the value of DOCUMENT_PRODUCT_OTHER_EXPENSES
+     *
+     * @param float $value
+     */
+    public function setDocumentProductOtherExpenses(float $value)
+    {
+        $value = number_format($value, 2, '.', '');
+
+        $this->content->put('document_product_other_expenses', $value);
+    }
+
+    public function checkRequiredFiels()
+    {
+        foreach (self::REQUIRED_PROPERTIES as $property) {
+            if (!$this->content->get($property)) {
+                throw new RequiredFieldException("Propriedade $property é obrigatória");
+            }
+        }
     }
 }

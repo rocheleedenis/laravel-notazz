@@ -7,15 +7,15 @@ use Illuminate\Support\Str;
 class Produtos
 {
     /**
-     * Collection object.
+     * Associative collection for storing property values.
      *
      * @var Collection
      */
-    protected $itens;
+    protected $content;
 
     public function __construct()
     {
-        $this->itens = collect();
+        $this->content = collect();
     }
 
     /**
@@ -25,26 +25,26 @@ class Produtos
      */
     public function addItem(ProdutoItem $item)
     {
-        $this->itens->push($item->collection);
+        $item->checkRequiredFiels();
+
+        $this->content->push($item->content);
     }
 
     public function getSumItemsValue()
     {
-        return $this->itens->sum(function ($item) {
+        return $this->content->sum(function ($item) {
             return $item->get('document_product_unitary_value') * $item->get('document_product_qtd');
         });
     }
 
-    public function mount()
+    public function toArray()
     {
-        $itens = [];
-
-        $itens['DOCUMENT_PRODUCT'] = $this->itens->map(function ($item) {
-            return $item->mapWithKeys(function($value, $key) {
-                return [Str::upper($key) => $value];
+        $items = $this->content->map(function ($item) {
+                return $item->mapWithKeys(function($value, $key) {
+                    return [Str::upper($key) => $value];
+                })->toArray();
             })->toArray();
-        })->toArray();
 
-        return $itens;
+        return [ 'DOCUMENT_PRODUCT' => $items];
     }
 }

@@ -2,19 +2,39 @@
 
 namespace RocheleEdenis\LaravelNotazz;
 
-use RocheleEdenis\LaravelNotazz\Client\Client;
+use GuzzleHttp\Client;
 use RocheleEdenis\LaravelNotazz\Builders\NotaFiscalBuilder;
+use RocheleEdenis\LaravelNotazz\Exceptions\ErrorStatusProcessamentoException;
 
 class Notazz
 {
+    public const API_URL = 'https://app.notazz.com/api';
+
     /**
-     * @var NotaFiscalBuilder
+     * Status possíveis
      */
-    protected $nota;
+    const STATUS_SUCESSO = 'sucesso';
+    const STATUS_ERRO    = 'erro';
+
+    /**
+     * Códigos de resposta da API
+     */
+    const COD_SUCESSO                 = 000;
+    const COD_REQUISICAO_SIMULTANEA   = 120;
+    const COD_MANUTENCAO              = 999;
+    const COD_APIKEY_NAO_LIBERADA     = 305;
+    const COD_APIKEY_INVALIDA         = 303;
+    const COD_REGISTRO_NAO_ENCONTRADO = 202;
+
     /**
      * @var Client
      */
     protected $client;
+
+    /**
+     * @var NotaFiscalBuilder
+     */
+    protected $nota;
 
     /**
      * @param string
@@ -22,23 +42,41 @@ class Notazz
      */
     public function __construct()
     {
-        $this->client = new Client;
+        $this->client = app(Client::class);
     }
 
-    public function registrar()
+    public function registrarNota(NotaFiscalBuilder $nota)
     {
-        return $this->client->request($this->nota->mount());
+        $this->nota = $nota;
+
+        return $this->sendRequest($this->prepareRequest());
     }
 
-    public function nfe()
+    protected function prepareRequest()
     {
-        $this->nota = new NotaFiscalBuilder('produto');
-
-        return $this->nota;
+        // verifica se falta informação pra mandar
+        return $this->nota->toArray();
     }
 
-    public function nfeToArray()
+    protected function sendRequest(array $fields)
     {
-        return $this->nota->mount();
+        try {
+            $response = $this->client->request('POST', self::API_URL, [
+                'form_params' => [
+                    "fields" => json_encode($fields)
+                ],
+                false
+            ]);
+
+            $result = json_decode($response->getBody()->getContents());
+
+            if ($result->statusProcessamento === 'erro') {
+                throw new ErrorStatusProcessamentoException("Erro ao registrar a nota: $result->motivo", 400);
+            }
+
+            return $result;
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }

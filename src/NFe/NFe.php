@@ -2,10 +2,6 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\NFe\Documento;
-use RocheleEdenis\LaravelNotazz\NFe\Produtos;
-use RocheleEdenis\LaravelNotazz\NFe\Destinatario;
-
 class NFe
 {
     /**
@@ -21,6 +17,10 @@ class NFe
      * @var Produtos
      */
     protected $produtos;
+    /**
+     * @var Produtos
+     */
+    private $method = 'create_nfe_55';
 
     /**
      * @param Destinatario
@@ -37,13 +37,13 @@ class NFe
         $this->produtos     = $produtos;
     }
 
-    public function mount()
+    public function toArray()
     {
         return array_merge(
-            ['METHOD' => 'create_nfe_55'],
-            $this->destinatario->mount(),
-            $this->documento->mount(),
-            $this->produtos->mount()
+            ['METHOD' => $this->method],
+            $this->destinatario->toArray(),
+            $this->documento->toArray(),
+            $this->produtos->toArray()
         );
     }
 }

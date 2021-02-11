@@ -8,15 +8,15 @@ use Illuminate\Support\Collection;
 class Destinatario
 {
     /**
-     * Collection object.
+     * Associative collection for storing property values.
      *
      * @var Collection
      */
-    protected $collection;
+    protected $content;
 
     public function __construct()
     {
-        $this->collection = collect();
+        $this->content = collect();
     }
 
     /**
@@ -27,7 +27,7 @@ class Destinatario
      */
     public function setDestinationName(string $destination_name)
     {
-        $this->collection->put('destination_name', $destination_name);
+        $this->content->put('destination_name', $destination_name);
     }
 
     /**
@@ -38,7 +38,7 @@ class Destinatario
      */
     public function setDestinationTaxid(string $destination_taxid)
     {
-        $this->collection->put('destination_taxid', $destination_taxid);
+        $this->content->put('destination_taxid', $destination_taxid);
     }
 
     /**
@@ -49,7 +49,7 @@ class Destinatario
      */
     public function setDestinationIe(string $destination_ie)
     {
-        $this->collection->put('destination_ie', $destination_ie);
+        $this->content->put('destination_ie', $destination_ie);
     }
 
     /**
@@ -60,7 +60,7 @@ class Destinatario
      */
     public function setDestinationIm(string $destination_im)
     {
-        $this->collection->put('destination_im', $destination_im);
+        $this->content->put('destination_im', $destination_im);
     }
 
     /**
@@ -71,14 +71,14 @@ class Destinatario
      */
     public function setDestinationTaxtype(string $destination_taxtype)
     {
-        $valoresAceitos = ['F', 'J', 'E'];
+        $valoresAceitos      = ['F', 'J', 'E'];
         $destination_taxtype = Str::upper($destination_taxtype);
 
-        if (! in_array($destination_taxtype, $valoresAceitos)) {
+        if (!in_array($destination_taxtype, $valoresAceitos)) {
             throw new \Exception("O tipo do destinatário (taxtype) precisa ser um dos seguintes valores: 'F', 'J' ou 'E'", 1);
         }
 
-        $this->collection->put('destination_taxtype', $destination_taxtype);
+        $this->content->put('destination_taxtype', $destination_taxtype);
     }
 
     /**
@@ -89,7 +89,7 @@ class Destinatario
      */
     public function setDestinationStreet(string $destination_street)
     {
-        $this->collection->put('destination_street', $destination_street);
+        $this->content->put('destination_street', $destination_street);
     }
 
     /**
@@ -100,7 +100,7 @@ class Destinatario
      */
     public function setDestinationNumber(string $destination_number)
     {
-        $this->collection->put('destination_number', $destination_number);
+        $this->content->put('destination_number', $destination_number);
     }
 
     /**
@@ -111,7 +111,7 @@ class Destinatario
      */
     public function setDestinationComplement($destination_complement = '')
     {
-        $this->collection->put('destination_complement', $destination_complement);
+        $this->content->put('destination_complement', $destination_complement);
     }
 
     /**
@@ -122,7 +122,7 @@ class Destinatario
      */
     public function setDestinationDistrict(string $destination_district)
     {
-        $this->collection->put('destination_district', $destination_district);
+        $this->content->put('destination_district', $destination_district);
     }
 
     /**
@@ -133,7 +133,7 @@ class Destinatario
      */
     public function setDestinationCity(string $destination_city)
     {
-        $this->collection->put('destination_city', $destination_city);
+        $this->content->put('destination_city', $destination_city);
     }
 
     /**
@@ -150,7 +150,7 @@ class Destinatario
             throw new \Exception('Estado do destinatário (UF) não existe!', 1);
         }
 
-        $this->collection->put('destination_uf', $destination_uf);
+        $this->content->put('destination_uf', $destination_uf);
     }
 
     /**
@@ -161,7 +161,7 @@ class Destinatario
      */
     public function setDestinationZipcode(string $destination_zipcode)
     {
-        $this->collection->put('destination_zipcode', $destination_zipcode);
+        $this->content->put('destination_zipcode', $destination_zipcode);
     }
 
     /**
@@ -172,7 +172,7 @@ class Destinatario
      */
     public function setDestinationPhone(string $destination_phone = '')
     {
-        $this->collection->put('destination_phone', $destination_phone);
+        $this->content->put('destination_phone', $destination_phone);
     }
 
     /**
@@ -183,7 +183,7 @@ class Destinatario
      */
     public function setDestinationEmail(string $destination_email)
     {
-        $this->collection->put('destination_email', $destination_email);
+        $this->content->put('destination_email', $destination_email);
     }
 
     /**
@@ -195,12 +195,12 @@ class Destinatario
      */
     public function setDestinationEmailSend(array $destination_email_send)
     {
-        $this->collection->put('destination_email_send', $destination_email_send);
+        $this->content->put('destination_email_send', $destination_email_send);
     }
 
-    public function mount()
+    public function toArray()
     {
-        return $this->collection->mapWithKeys(function($value, $key) {
+        return $this->content->mapWithKeys(function ($value, $key) {
             return [Str::upper($key) => $value];
         })->toArray();
     }
