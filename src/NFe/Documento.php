@@ -140,7 +140,7 @@ class Documento
 
     public function toArray()
     {
-        return $this->content->mapWithKeys(function($value, $key) {
+        return $this->content->mapWithKeys(function ($value, $key) {
             return [Str::upper($key) => $value];
         })->toArray();
     }

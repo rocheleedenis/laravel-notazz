@@ -54,7 +54,8 @@ class Notazz
 
     protected function prepareRequest()
     {
-        // verifica se falta informação pra mandar
+        $this->nota->checkRequiredFiels();
+
         return $this->nota->toArray();
     }
 
@@ -63,7 +64,7 @@ class Notazz
         try {
             $response = $this->client->request('POST', self::API_URL, [
                 'form_params' => [
-                    "fields" => json_encode($fields)
+                    'fields' => json_encode($fields)
                 ],
                 false
             ]);

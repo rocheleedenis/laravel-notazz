@@ -200,4 +200,9 @@ class NotaFiscalBuilder
     {
         return $this->produtos->sumItemsValue();
     }
+
+    public function checkRequiredFiels()
+    {
+        $this->getNFObject()->checkRequiredFiels();
+    }
 }

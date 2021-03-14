@@ -4,7 +4,7 @@ namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use \Illuminate\Support\Str;
 use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
-use RocheleEdenis\LaravelNotazz\Nfe\Destinatario as DestinatarioNFSe;
+use RocheleEdenis\LaravelNotazz\NFe\Destinatario as DestinatarioNFSe;
 
 class DestinatarioBuilder
 {

@@ -1,12 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace RocheleEdenis\LaravelNotazz\Tests\Feature;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use RocheleEdenis\LaravelNotazz\Builders\NotaFiscalBuilder;
+use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 use RocheleEdenis\LaravelNotazz\Notazz;
 
 class NotazzTest extends TestCase
@@ -21,7 +22,7 @@ class NotazzTest extends TestCase
 
         $this->mockRespostaNotazz($esperado);
 
-        $notaFiscal = (new NotaFiscalBuilder)->nfe()
+        $notaFiscal = app(NotaFiscalBuilder::class)->nfe()
             ->apiKey('123')
             ->destinatario()
                 ->name('Marli Kamilly Daiane da Conceição')
@@ -60,7 +61,35 @@ class NotazzTest extends TestCase
         $this->assertEquals($esperado, $response);
     }
 
-    public function mockRespostaNotazz(array $res)
+    public function test_nao_registra_nota_faltando_campos()
+    {
+        $this->expectException(RequiredFieldException::class);
+
+        $this->mockRespostaNotazz();
+
+        $notaFiscal = app(NotaFiscalBuilder::class)->nfe()
+            ->apiKey('123')
+            ->destinatario()
+                ->name('Marli Kamilly Daiane da Conceição')
+                ->taxid('09889568020')
+                ->taxtype('F')
+                ->street('Rua dos Limões')
+                ->number('735')
+                ->district('Maria Goretti')
+                ->city('Belo Horizonte')
+                ->uf('MG')
+                ->zipcode('31930425')
+                ->email('marlikamilly@teste.com')
+                ->phone(3128334142)
+            ->documento()
+                ->basevalue(70.30)
+                ->description('Venda')
+                ->issueDate('2021-01-08 10:23:47');
+
+        app(Notazz::class)->registrarNota($notaFiscal);
+    }
+
+    protected function mockRespostaNotazz(array $res = [])
     {
         $stream = $this->createMock(Stream::class);
         $stream->method('getContents')

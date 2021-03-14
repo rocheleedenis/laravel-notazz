@@ -3,6 +3,7 @@
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
 use Illuminate\Support\Str;
+use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
 class Produtos
 {
@@ -40,11 +41,18 @@ class Produtos
     public function toArray()
     {
         $items = $this->content->map(function ($item) {
-                return $item->mapWithKeys(function($value, $key) {
-                    return [Str::upper($key) => $value];
-                })->toArray();
+            return $item->mapWithKeys(function ($value, $key) {
+                return [Str::upper($key) => $value];
             })->toArray();
+        })->toArray();
 
-        return [ 'DOCUMENT_PRODUCT' => $items];
+        return ['DOCUMENT_PRODUCT' => $items];
+    }
+
+    public function checkRequiredFiels()
+    {
+        if (!$this->content->count()) {
+            throw new RequiredFieldException('Necessário informar ao menos um produto para este tipo de nota.');
+        }
     }
 }

@@ -46,4 +46,13 @@ class NFe
             $this->produtos->toArray()
         );
     }
+
+    public function checkRequiredFiels()
+    {
+        $this->destinatario->checkRequiredFiels();
+        $this->documento->checkRequiredFiels();
+        $this->produtos->checkRequiredFiels();
+
+        return $this;
+    }
 }

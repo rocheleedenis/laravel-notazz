@@ -52,7 +52,7 @@ class NotaFiscalBuilderTest extends TestCase
         $this->assertTrue($this->notaFiscal->isNFe());
     }
 
-    public function test_valida_dados_retornados_apos_montagem_da_nota()
+    public function test_monta_array_da_nota_corretamente()
     {
         $this->notaFiscal->nfe()
             ->apiKey('123')

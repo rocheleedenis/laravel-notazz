@@ -4,9 +4,22 @@ namespace RocheleEdenis\LaravelNotazz\NFe;
 
 use \Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
 class Destinatario
 {
+    const REQUIRED_PROPERTIES = [
+        'destination_name',
+        'destination_taxid',
+        'destination_taxtype',
+        'destination_street',
+        'destination_number',
+        'destination_district',
+        'destination_city',
+        'destination_uf',
+        'destination_zipcode',
+    ];
+
     /**
      * Associative collection for storing property values.
      *
@@ -203,5 +216,14 @@ class Destinatario
         return $this->content->mapWithKeys(function ($value, $key) {
             return [Str::upper($key) => $value];
         })->toArray();
+    }
+
+    public function checkRequiredFiels()
+    {
+        foreach (self::REQUIRED_PROPERTIES as $property) {
+            if (!$this->content->get($property)) {
+                throw new RequiredFieldException("Propriedade $property é obrigatória");
+            }
+        }
     }
 }
