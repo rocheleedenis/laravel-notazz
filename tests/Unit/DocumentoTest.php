@@ -3,14 +3,14 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use RocheleEdenis\LaravelNotazz\Builders\DocumentoBuilder;
+use RocheleEdenis\LaravelNotazz\Builders\DocumentBuilder;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class DocumentoTest extends TestCase
+class DocumentTest extends TestCase
 {
-    public function test_monta_documento_corretamente()
+    public function test_monta_document_corretamente()
     {
-        $documento = app(DocumentoBuilder::class)
+        $document = app(DocumentBuilder::class)
             ->basevalue(70.30)
             ->cnae(8599604)
             ->goal(1)
@@ -35,7 +35,7 @@ class DocumentoTest extends TestCase
 
         $this->assertEqualsCanonicalizing(
             $esperado,
-            $documento->getInstance()->toArray()
+            $document->getInstance()->toArray()
         );
     }
 
@@ -43,11 +43,11 @@ class DocumentoTest extends TestCase
     {
         $this->expectException(RequiredFieldException::class);
 
-        $documento = app(DocumentoBuilder::class)
+        $document = app(DocumentBuilder::class)
             ->natureOperation('VENDA')
             ->cnae(8599604)
             ->goal(1);
 
-        $documento->getInstance()->checkRequiredFiels();
+        $document->getInstance()->checkRequiredFiels();
     }
 }

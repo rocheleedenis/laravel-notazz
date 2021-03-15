@@ -45,7 +45,7 @@ class Notazz
         $this->client = app(Client::class);
     }
 
-    public function registrarNota(NotaFiscalBuilder $nota)
+    public function register(NotaFiscalBuilder $nota)
     {
         $this->nota = $nota;
 

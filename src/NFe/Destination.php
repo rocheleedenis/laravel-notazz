@@ -6,7 +6,7 @@ use \Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class Destinatario
+class Destination
 {
     const REQUIRED_PROPERTIES = [
         'destination_name',

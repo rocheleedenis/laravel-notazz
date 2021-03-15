@@ -24,7 +24,7 @@ class NotazzTest extends TestCase
 
         $notaFiscal = app(NotaFiscalBuilder::class)->nfe()
             ->apiKey('123')
-            ->destinatario()
+            ->destination()
                 ->name('Marli Kamilly Daiane da Conceição')
                 ->taxid('09889568020')
                 ->taxtype('F')
@@ -36,11 +36,11 @@ class NotazzTest extends TestCase
                 ->zipcode('31930425')
                 ->email('marlikamilly@teste.com')
                 ->phone(3128334142)
-            ->documento()
+            ->document()
                 ->basevalue(70.30)
                 ->description('Venda')
                 ->issueDate('2021-01-08 10:23:47')
-            ->produtos()
+            ->products()
                 ->add()
                     ->cod(123)
                     ->name('Escova de dentes Cepacol')
@@ -54,7 +54,7 @@ class NotazzTest extends TestCase
                     ->unitaryValue(55.10)
                 ->save();
 
-        $response = app(Notazz::class)->registrarNota($notaFiscal);
+        $response = app(Notazz::class)->register($notaFiscal);
 
         $esperado = (object) $esperado;
 
@@ -69,7 +69,7 @@ class NotazzTest extends TestCase
 
         $notaFiscal = app(NotaFiscalBuilder::class)->nfe()
             ->apiKey('123')
-            ->destinatario()
+            ->destination()
                 ->name('Marli Kamilly Daiane da Conceição')
                 ->taxid('09889568020')
                 ->taxtype('F')
@@ -81,12 +81,12 @@ class NotazzTest extends TestCase
                 ->zipcode('31930425')
                 ->email('marlikamilly@teste.com')
                 ->phone(3128334142)
-            ->documento()
+            ->document()
                 ->basevalue(70.30)
                 ->description('Venda')
                 ->issueDate('2021-01-08 10:23:47');
 
-        app(Notazz::class)->registrarNota($notaFiscal);
+        app(Notazz::class)->register($notaFiscal);
     }
 
     protected function mockRespostaNotazz(array $res = [])

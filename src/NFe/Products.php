@@ -5,7 +5,7 @@ namespace RocheleEdenis\LaravelNotazz\NFe;
 use Illuminate\Support\Str;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class Produtos
+class Products
 {
     /**
      * Associative collection for storing property values.
@@ -22,9 +22,9 @@ class Produtos
     /**
      * Adiciona produtos
      *
-     * @param ProdutoItem
+     * @param ProductItem
      */
-    public function addItem(ProdutoItem $item)
+    public function addItem(ProductItem $item)
     {
         $item->checkRequiredFiels();
 

@@ -3,14 +3,14 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use RocheleEdenis\LaravelNotazz\Builders\ProdutosBuilder;
+use RocheleEdenis\LaravelNotazz\Builders\ProductsBuilder;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class ProdutosTest extends TestCase
+class ProductsTest extends TestCase
 {
     public function test_monta_produtos_corretamente()
     {
-        $produtos = app(ProdutosBuilder::class)
+        $produtos = app(ProductsBuilder::class)
             ->add()
                 ->cod('000123')
                 ->name('Escova de dentes Cepacol')
@@ -66,7 +66,7 @@ class ProdutosTest extends TestCase
     {
         $this->expectException(RequiredFieldException::class);
 
-        app(ProdutosBuilder::class)
+        app(ProductsBuilder::class)
             ->add()
                 ->cod('000123')
                 ->name('Escova de dentes Cepacol')

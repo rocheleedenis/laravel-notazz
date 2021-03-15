@@ -6,52 +6,52 @@ class NFe
 {
     /**
      * Referente à própria nota
-     * @var Documento
+     * @var Document
      */
-    protected $documento;
+    protected $document;
     /**
-     * @var Destinatario
+     * @var Destination
      */
-    protected $destinatario;
+    protected $destination;
     /**
-     * @var Produtos
+     * @var Products
      */
-    protected $produtos;
+    protected $products;
     /**
-     * @var Produtos
+     * @var Products
      */
     private $method = 'create_nfe_55';
 
     /**
-     * @param Destinatario
-     * @param Documento
-     * @param Produtos
+     * @param Destination
+     * @param Document
+     * @param Products
      */
     public function __construct(
-        Destinatario $destinatario,
-        Documento $documento,
-        Produtos $produtos
+        Destination $destination,
+        Document $document,
+        Products $products
     ) {
-        $this->destinatario = $destinatario;
-        $this->documento    = $documento;
-        $this->produtos     = $produtos;
+        $this->destination = $destination;
+        $this->document    = $document;
+        $this->products    = $products;
     }
 
     public function toArray()
     {
         return array_merge(
             ['METHOD' => $this->method],
-            $this->destinatario->toArray(),
-            $this->documento->toArray(),
-            $this->produtos->toArray()
+            $this->destination->toArray(),
+            $this->document->toArray(),
+            $this->products->toArray()
         );
     }
 
     public function checkRequiredFiels()
     {
-        $this->destinatario->checkRequiredFiels();
-        $this->documento->checkRequiredFiels();
-        $this->produtos->checkRequiredFiels();
+        $this->destination->checkRequiredFiels();
+        $this->document->checkRequiredFiels();
+        $this->products->checkRequiredFiels();
 
         return $this;
     }

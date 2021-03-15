@@ -5,7 +5,7 @@ namespace RocheleEdenis\LaravelNotazz\NFe;
 use Illuminate\Support\Collection;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class ProdutoItem extends Collection
+class ProductItem extends Collection
 {
     const REQUIRED_PROPERTIES = [
         'document_product_cod',

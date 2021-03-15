@@ -3,18 +3,18 @@
 namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use \Illuminate\Support\Str;
-use RocheleEdenis\LaravelNotazz\NFe\Produtos;
-use RocheleEdenis\LaravelNotazz\NFe\ProdutoItem;
 use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
+use RocheleEdenis\LaravelNotazz\NFe\ProductItem;
+use RocheleEdenis\LaravelNotazz\NFe\Products;
 
-class ProdutosBuilder
+class ProductsBuilder
 {
     /**
-     * @var Produtos
+     * @var Products
      */
-    protected $produtos;
+    protected $products;
     /**
-     * @var ProdutoItem
+     * @var ProductItem
      */
     protected $produtoItem;
     /**
@@ -24,7 +24,7 @@ class ProdutosBuilder
 
     public function __construct()
     {
-        $this->produtos = app(Produtos::class);
+        $this->products = app(Products::class);
     }
 
     public function __call(string $method, array $args)
@@ -56,7 +56,7 @@ class ProdutosBuilder
     public function save()
     {
         $this->setAdding(false);
-        $this->produtos->addItem($this->produtoItem);
+        $this->products->addItem($this->produtoItem);
         $this->produtoItem = null;
 
         return $this;
@@ -72,22 +72,22 @@ class ProdutosBuilder
         return $this->adding;
     }
 
-    protected function makeProductItemInstance(): ProdutoItem
+    protected function makeProductItemInstance(): ProductItem
     {
-        if ($this->produtoItem instanceof ProdutoItem) {
+        if ($this->produtoItem instanceof ProductItem) {
             return $this->produtoItem;
         }
 
-        return new ProdutoItem();
+        return new ProductItem();
     }
 
     public function getInstance()
     {
-        return $this->produtos;
+        return $this->products;
     }
 
     public function sumItemsValue()
     {
-        return $this->produtos->getSumItemsValue();
+        return $this->products->getSumItemsValue();
     }
 }

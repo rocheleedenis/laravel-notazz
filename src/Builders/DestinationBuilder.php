@@ -4,16 +4,16 @@ namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use \Illuminate\Support\Str;
 use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
-use RocheleEdenis\LaravelNotazz\NFe\Destinatario as DestinatarioNFSe;
+use RocheleEdenis\LaravelNotazz\NFe\Destination as DestinationNFSe;
 
-class DestinatarioBuilder
+class DestinationBuilder
 {
-    protected $destinatario;
+    protected $destination;
     protected $lastCalled;
 
     public function __construct()
     {
-        $this->destinatario = new DestinatarioNFSe();
+        $this->destination = new DestinationNFSe();
     }
 
     public function __call(string $method, array $args)
@@ -22,19 +22,19 @@ class DestinatarioBuilder
 
         $method = "setDestination$method";
 
-        if (false === method_exists($this->destinatario, $method)) {
-            throw new MethodNotFoundException("Method ($method) not found in class " . get_class($this->destinatario));
+        if (false === method_exists($this->destination, $method)) {
+            throw new MethodNotFoundException("Method ($method) not found in class " . get_class($this->destination));
         }
 
         $this->lastCalled = $method;
 
-        $this->destinatario->$method($args[0]);
+        $this->destination->$method($args[0]);
 
         return $this;
     }
 
     public function getInstance()
     {
-        return $this->destinatario;
+        return $this->destination;
     }
 }

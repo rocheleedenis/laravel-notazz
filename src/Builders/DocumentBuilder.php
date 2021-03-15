@@ -3,16 +3,16 @@
 namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use Illuminate\Support\Str;
-use RocheleEdenis\LaravelNotazz\NFe\Documento;
+use RocheleEdenis\LaravelNotazz\NFe\Document;
 use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
 
-class DocumentoBuilder
+class DocumentBuilder
 {
-    protected $documento;
+    protected $document;
 
     public function __construct()
     {
-        $this->documento = new Documento();
+        $this->document = new Document();
     }
 
     public function __call(string $method, array $args)
@@ -21,17 +21,17 @@ class DocumentoBuilder
 
         $method = "setDocument$method";
 
-        if (false === method_exists($this->documento, $method)) {
-            throw new MethodNotFoundException("Method ($method) not found in class " . get_class($this->documento));
+        if (false === method_exists($this->document, $method)) {
+            throw new MethodNotFoundException("Method ($method) not found in class " . get_class($this->document));
         }
 
-        $this->documento->$method($args[0]);
+        $this->document->$method($args[0]);
 
         return $this;
     }
 
     public function getInstance()
     {
-        return $this->documento;
+        return $this->document;
     }
 }

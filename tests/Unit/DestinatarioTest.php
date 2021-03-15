@@ -3,14 +3,14 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use RocheleEdenis\LaravelNotazz\Builders\DestinatarioBuilder;
+use RocheleEdenis\LaravelNotazz\Builders\DestinationBuilder;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class DestinatarioTest extends TestCase
+class DestinationTest extends TestCase
 {
-    public function test_monta_documento_corretamente()
+    public function test_monta_document_corretamente()
     {
-        $documento = app(DestinatarioBuilder::class)
+        $document = app(DestinationBuilder::class)
             ->name('Marli Kamilly Daiane da Conceição')
             ->taxid('09889568020')
             ->taxtype('F')
@@ -39,7 +39,7 @@ class DestinatarioTest extends TestCase
 
         $this->assertEqualsCanonicalizing(
             $esperado,
-            $documento->getInstance()->toArray()
+            $document->getInstance()->toArray()
         );
     }
 
@@ -47,7 +47,7 @@ class DestinatarioTest extends TestCase
     {
         $this->expectException(RequiredFieldException::class);
 
-        $documento = app(DestinatarioBuilder::class)
+        $document = app(DestinationBuilder::class)
             ->name('Marli Kamilly Daiane da Conceição')
             ->taxid('09889568020')
             ->taxtype('F')
@@ -59,6 +59,6 @@ class DestinatarioTest extends TestCase
             ->email('marlikamilly@teste.com')
             ->phone(3128334142);
 
-        $documento->getInstance()->checkRequiredFiels();
+        $document->getInstance()->checkRequiredFiels();
     }
 }

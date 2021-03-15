@@ -7,17 +7,17 @@ use RocheleEdenis\LaravelNotazz\NFe\NFe;
 class NotaFiscalBuilder
 {
     /**
-     * @var DestinatarioBuilder
+     * @var DestinationBuilder
      */
-    protected $destinatario;
+    protected $destination;
     /**
-     * @var DocumentoBuilder;
+     * @var DocumentBuilder;
      */
-    protected $documento;
+    protected $document;
     /**
-     * @var ProdutosBuilder
+     * @var ProductsBuilder
      */
-    protected $produtos;
+    protected $products;
     /**
      * Entidade de interação atual
      *
@@ -51,9 +51,9 @@ class NotaFiscalBuilder
     {
         $this->nfeType = $nfeType;
 
-        $this->documento    = new DocumentoBuilder();
-        $this->destinatario = new DestinatarioBuilder();
-        $this->produtos     = new ProdutosBuilder();
+        $this->document    = new DocumentBuilder();
+        $this->destination = new DestinationBuilder();
+        $this->products    = new ProductsBuilder();
     }
 
     /**
@@ -139,23 +139,23 @@ class NotaFiscalBuilder
         return $this;
     }
 
-    public function destinatario()
+    public function destination()
     {
-        $this->current = 'destinatario';
+        $this->current = 'destination';
 
         return $this;
     }
 
-    public function documento()
+    public function document()
     {
-        $this->current = 'documento';
+        $this->current = 'document';
 
         return $this;
     }
 
-    public function produtos()
+    public function products()
     {
-        $this->current = 'produtos';
+        $this->current = 'products';
 
         return $this;
     }
@@ -170,9 +170,9 @@ class NotaFiscalBuilder
     {
         if ($this->isNFe()) {
             return new NFe(
-                $this->destinatario->getInstance(),
-                $this->documento->getInstance(),
-                $this->produtos->getInstance()
+                $this->destination->getInstance(),
+                $this->document->getInstance(),
+                $this->products->getInstance()
                 // $this->shipping->getInstance()
             );
         }
@@ -198,7 +198,7 @@ class NotaFiscalBuilder
 
     public function sumItemsValue()
     {
-        return $this->produtos->sumItemsValue();
+        return $this->products->sumItemsValue();
     }
 
     public function checkRequiredFiels()

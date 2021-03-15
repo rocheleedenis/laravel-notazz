@@ -5,7 +5,7 @@ namespace RocheleEdenis\LaravelNotazz\NFe;
 use Illuminate\Support\Str;
 use RocheleEdenis\LaravelNotazz\Exceptions\RequiredFieldException;
 
-class Documento
+class Document
 {
     const REQUIRED_PROPERTIES = [
         'document_basevalue',
