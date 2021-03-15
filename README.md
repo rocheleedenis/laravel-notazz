@@ -1,10 +1,18 @@
+[![Packagist](https://img.shields.io/packagist/v/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-boleto)
+
+[![Packagist](https://img.shields.io/packagist/dt/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-notazz)
+
+[![Packagist](https://img.shields.io/packagist/l/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-notazz)
+
+[![GitHub forks](https://img.shields.io/github/forks/rocheleedenis/laravel-notazz.svg?style=social&label=Fork)](https://github.com/rocheleedenis/laravel-notazz)
+
 # Laravel Notazz
 
 Pacote para facilitar integração com o sistema de emissão de notas fiscais Notazz.
 
 ## Instalação
 
-**Requerimentos**
+### Requerimentos
 
 - [Php 7.2](http://php.net/releases/7_0_0.php)
 - [Laravel 5.8](https://laravel.com/docs/5.8)
@@ -15,12 +23,15 @@ Instalação via linha de comando:
 
 ## Modo de usar
 
-Para criar uma NF-e (Nota Fiscal de Produto) com apenas os campos obrigatórios:
+Por enquanto só é possível gerar NF-e (Nota Fiscal de Produto).
+Exemplo de como criar uma com os campos obrigatórios:
 
 ```php
-$notazz = new \RocheleEdenis\LaravelNotazz;
-$notazz->apiKey('b5b8f576a8075442d75be165b0447ace')
-    ->destinatario()
+$notaFiscal = app(NotaFiscalBuilder::class);
+$notaFiscal
+    ->nfe()
+    ->apiKey('b5b8f576a8075442d75be165b0447ace')
+    ->destination()
         ->name('Beatriz Isabelly Mendes')
         ->taxid('01708781390')
         ->taxtype('F')
@@ -32,10 +43,10 @@ $notazz->apiKey('b5b8f576a8075442d75be165b0447ace')
         ->zipcode('63887-973')
         ->email('beatriz.isabelly@gmail.com')
         ->phone('(88) 2592-2647')
-    ->documento()
+    ->document()
         ->basevalue(70.30)
         ->description('Venda')
-    ->produtos()
+    ->products()
         ->add()
             ->cod(123)
             ->name('Escova de dente Cepacol')
@@ -50,7 +61,7 @@ $notazz->apiKey('b5b8f576a8075442d75be165b0447ace')
         ->save();
 ```
 
-Os métodos usados após usar os métodos principais `documento()`, `destinatario()` e `produtos()` levam exatamente o mesmo nome das propriedades descritas na documentação oficial do Notazz, mas removendo o prefixo da entidade a quem pertece. Qualquer propriedade que não esteja presente no exemplo está disponível seguindo essa lógica.
+Os métodos usados após usar os métodos principais `document()`, `destination()` e `products()` levam exatamente o mesmo nome das propriedades descritas na documentação oficial do Notazz, mas removendo o prefixo da entidade a quem pertece. Qualquer propriedade que não esteja presente no exemplo está disponível seguindo essa lógica.
 
 ### Testes
 
@@ -58,17 +69,27 @@ Por definição o retorno das funções que fazem chamada na API do Notazz retor
 
 ### Métodos disponíveis
 
-Após instanciar a classe principal será possível chamar os seguintes métodos:
+Após instanciar a classe Notazz será possível chamar os seguintes métodos:
+
+```php
+$notaFiscal = new \RocheleEdenis\LaravelNotazz\Builders\NotaFiscalBuilder;
+
+// Retorna a soma do valor dos itens da nota fiscal
+$notaFiscal->sumItemsValue();
+
+// Retorna o array com a nota ja montada
+$notaFiscal->toArray()
+```
+
+Após instanciar a classe Notazz será possível chamar os seguintes métodos:
 
 ```php
 $notazz = new \RocheleEdenis\LaravelNotazz;
 
 // Envia a requisição para o Notazz para registrar a nova nota
-$notazz->registrar();
-// Retorna o mesmo retorno da API do Notazz
-
-// Retorna a soma do valor dos itens da nota fiscal
-$notazz->sumItemsValue();
+$notaFiscal = new NotaFiscalBuilder;
+...
+$notazz->register($notaFiscal);
 ```
 
 **Importante!**

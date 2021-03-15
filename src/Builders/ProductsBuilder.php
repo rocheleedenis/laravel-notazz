@@ -3,19 +3,28 @@
 namespace RocheleEdenis\LaravelNotazz\Builders;
 
 use \Illuminate\Support\Str;
-use RocheleEdenis\LaravelNotazz\NFe\Produtos;
-use RocheleEdenis\LaravelNotazz\NFe\ProdutoItem;
 use RocheleEdenis\LaravelNotazz\Exceptions\MethodNotFoundException;
+use RocheleEdenis\LaravelNotazz\NFe\ProductItem;
+use RocheleEdenis\LaravelNotazz\NFe\Products;
 
-class ProdutosBuilder
+class ProductsBuilder
 {
-    protected $produtos;
+    /**
+     * @var Products
+     */
+    protected $products;
+    /**
+     * @var ProductItem
+     */
     protected $produtoItem;
-    protected $adding;
+    /**
+     * @var bool
+     */
+    protected $adding = false;
 
     public function __construct()
     {
-        $this->produtos = new Produtos();
+        $this->products = app(Products::class);
     }
 
     public function __call(string $method, array $args)
@@ -27,7 +36,7 @@ class ProdutosBuilder
         $method = "setDocumentProduct$method";
 
         if (false === method_exists($this->produtoItem, $method)) {
-            throw new MethodNotFoundException("Method ($method) not found in class " . get_class($this->produtoItem));
+            throw new MethodNotFoundException("Método ($method) não encontrado na classe " . get_class($this->produtoItem));
         }
 
         $this->produtoItem->$method($args[0]);
@@ -47,7 +56,7 @@ class ProdutosBuilder
     public function save()
     {
         $this->setAdding(false);
-        $this->produtos->addItem($this->produtoItem);
+        $this->products->addItem($this->produtoItem);
         $this->produtoItem = null;
 
         return $this;
@@ -63,22 +72,22 @@ class ProdutosBuilder
         return $this->adding;
     }
 
-    protected function makeProductItemInstance(): ProdutoItem
+    protected function makeProductItemInstance(): ProductItem
     {
-        if ($this->produtoItem instanceof ProdutoItem) {
+        if ($this->produtoItem instanceof ProductItem) {
             return $this->produtoItem;
         }
 
-        return new ProdutoItem();
+        return new ProductItem();
     }
 
     public function getInstance()
     {
-        return $this->produtos;
+        return $this->products;
     }
 
     public function sumItemsValue()
     {
-        return $this->produtos->getSumItemsValue();
+        return $this->products->getSumItemsValue();
     }
 }

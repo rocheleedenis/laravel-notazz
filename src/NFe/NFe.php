@@ -2,48 +2,57 @@
 
 namespace RocheleEdenis\LaravelNotazz\NFe;
 
-use RocheleEdenis\LaravelNotazz\NFe\Documento;
-use RocheleEdenis\LaravelNotazz\NFe\Produtos;
-use RocheleEdenis\LaravelNotazz\NFe\Destinatario;
-
 class NFe
 {
     /**
      * Referente à própria nota
-     * @var Documento
+     * @var Document
      */
-    protected $documento;
+    protected $document;
     /**
-     * @var Destinatario
+     * @var Destination
      */
-    protected $destinatario;
+    protected $destination;
     /**
-     * @var Produtos
+     * @var Products
      */
-    protected $produtos;
+    protected $products;
+    /**
+     * @var Products
+     */
+    private $method = 'create_nfe_55';
 
     /**
-     * @param Destinatario
-     * @param Documento
-     * @param Produtos
+     * @param Destination
+     * @param Document
+     * @param Products
      */
     public function __construct(
-        Destinatario $destinatario,
-        Documento $documento,
-        Produtos $produtos
+        Destination $destination,
+        Document $document,
+        Products $products
     ) {
-        $this->destinatario = $destinatario;
-        $this->documento    = $documento;
-        $this->produtos     = $produtos;
+        $this->destination = $destination;
+        $this->document    = $document;
+        $this->products    = $products;
     }
 
-    public function mount()
+    public function toArray()
     {
         return array_merge(
-            ['METHOD' => 'create_nfe_55'],
-            $this->destinatario->mount(),
-            $this->documento->mount(),
-            $this->produtos->mount()
+            ['METHOD' => $this->method],
+            $this->destination->toArray(),
+            $this->document->toArray(),
+            $this->products->toArray()
         );
+    }
+
+    public function checkRequiredFiels()
+    {
+        $this->destination->checkRequiredFiels();
+        $this->document->checkRequiredFiels();
+        $this->products->checkRequiredFiels();
+
+        return $this;
     }
 }
