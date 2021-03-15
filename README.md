@@ -1,9 +1,6 @@
 [![Packagist](https://img.shields.io/packagist/v/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-boleto)
-
 [![Packagist](https://img.shields.io/packagist/dt/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-notazz)
-
 [![Packagist](https://img.shields.io/packagist/l/rocheleedenis/laravel-notazz.svg?style=flat-square)](https://github.com/rocheleedenis/laravel-notazz)
-
 [![GitHub forks](https://img.shields.io/github/forks/rocheleedenis/laravel-notazz.svg?style=social&label=Fork)](https://github.com/rocheleedenis/laravel-notazz)
 
 # Laravel Notazz
